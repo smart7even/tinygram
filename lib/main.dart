@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:tinygram/constants.dart';
 
+import 'features/home/presentation/pages/home.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -51,26 +51,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: const Color(0xFF517DA2),
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColors.darkBlue,
-          title: const Text("Tinygram"),
-          elevation: 0,
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.search),
-              onPressed: () {},
-            )
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.edit),
-          onPressed: () {},
-          elevation: 0,
-          backgroundColor: AppColors.blue,
-        ),
-        drawer: const Drawer(),
-      ),
+      home: const HomePage(),
       debugShowCheckedModeBanner: false,
     );
   }
