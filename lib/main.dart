@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:tinygram/constants.dart';
 
 import 'firebase_options.dart';
 
@@ -46,25 +47,47 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Tinygram',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: const Color(0xFF517DA2),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: AppColors.darkBlue,
+          title: const Text("Tinygram"),
+          elevation: 0,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () {},
+            )
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.edit),
+          onPressed: () {},
+          elevation: 0,
+          backgroundColor: AppColors.blue,
+        ),
+        drawer: const Drawer(),
+      ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class FirebaseAuthExamplePage extends StatefulWidget {
+  const FirebaseAuthExamplePage({Key? key, required this.title})
+      : super(key: key);
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<FirebaseAuthExamplePage> createState() =>
+      _FirebaseAuthExamplePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _FirebaseAuthExamplePageState extends State<FirebaseAuthExamplePage> {
   int _counter = 0;
   User? user;
 
@@ -77,6 +100,10 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      signIn();
+    }
   }
 
   void signIn() async {
