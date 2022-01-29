@@ -6,7 +6,7 @@ The initial goal was to create cross-platform telegram client which would work w
 
 ## Roadmap
 
-- [] Create mobile telegram UI (initially with Android support only)
-- [] Create messaging backend
-- [] Add desktop telegram UI
-- [] Rewrite API layer to work with real Telegram API
+- [ ] Create mobile telegram UI (initially with Android support only)
+- [ ] Create messaging backend
+- [ ] Add desktop telegram UI
+- [ ] Rewrite API layer to work with real Telegram API
