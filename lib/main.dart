@@ -49,8 +49,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Tinygram',
       theme: ThemeData(
-        primaryColor: const Color(0xFF517DA2),
-      ),
+          primaryColor: const Color(0xFF517DA2),
+          fontFamily: 'Roboto',
+          textTheme: const TextTheme(
+              bodyText1: TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 15,
+              ),
+              headline2: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 17,
+                  color: Colors.black))),
       home: const HomePage(),
       debugShowCheckedModeBanner: false,
     );

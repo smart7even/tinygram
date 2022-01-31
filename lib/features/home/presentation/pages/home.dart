@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tinygram/constants.dart';
 import 'package:tinygram/features/home/presentation/widgets/app_tab.dart';
+import 'package:tinygram/features/home/presentation/widgets/chat_tile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -66,11 +67,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       drawer: const Drawer(),
       body: TabBarView(
         controller: tabController,
-        children: const [
-          Center(
-            child: Text("All messages"),
-          ),
-          Center(
+        children: [
+          SingleChildScrollView(
+              child: Column(
+                  children: List.generate(
+                      10,
+                      (index) => ChatTile(
+                            title: 'Dart & Flutter',
+                            lastMessageSender: 'Yoda',
+                            lastMessage: 'May the force be with you',
+                            lastMessageSentAt: '18:43',
+                            unreadMessages: 13 * index + 1,
+                          )))),
+          const Center(
             child: Text("Personal messages"),
           )
         ],
