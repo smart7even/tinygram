@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:tinygram/constants.dart';
+import 'package:tinygram/features/home/domain/models/chat_tile_info.dart';
 
 class ChatTile extends StatelessWidget {
   const ChatTile(
-      {Key? key,
-      required this.title,
-      required this.lastMessageSender,
-      required this.lastMessage,
-      required this.lastMessageSentAt,
-      required this.unreadMessages,
-      required this.onPressed})
+      {Key? key, required this.chatTileInfo, required this.onPressed})
       : super(key: key);
 
-  final String title;
-  final String lastMessageSender;
-  final String lastMessage;
-  final String lastMessageSentAt;
-  final int unreadMessages;
+  final ChatTileInfo chatTileInfo;
   final VoidCallback onPressed;
 
   @override
@@ -32,7 +23,7 @@ class ChatTile extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: ClipOval(
                 child: Image.asset(
-                  'assets/images/dartchat.jpg',
+                  chatTileInfo.imagePath,
                   height: 60,
                   width: 60,
                 ),
@@ -56,7 +47,7 @@ class ChatTile extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                title,
+                                chatTileInfo.title,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: Theme.of(context).textTheme.headline2,
@@ -71,7 +62,7 @@ class ChatTile extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
-                                "$lastMessageSender: ",
+                                "${chatTileInfo.lastMessageSender}: ",
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyText1
@@ -79,7 +70,7 @@ class ChatTile extends StatelessWidget {
                               ),
                               Expanded(
                                 child: Text(
-                                  lastMessage,
+                                  chatTileInfo.lastMessage,
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyText1
@@ -99,7 +90,7 @@ class ChatTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        lastMessageSentAt,
+                        chatTileInfo.lastMessageSentAt,
                         style: Theme.of(context)
                             .textTheme
                             .bodyText1
@@ -115,7 +106,7 @@ class ChatTile extends StatelessWidget {
                             color: AppColors.grey.withOpacity(0.45),
                             borderRadius: BorderRadius.circular(80)),
                         child: Text(
-                          unreadMessages.toString(),
+                          chatTileInfo.unreadMessages.toString(),
                           style: Theme.of(context)
                               .textTheme
                               .bodyText1

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tinygram/constants.dart';
+import 'package:tinygram/features/home/domain/models/chat_tile_info.dart';
 import 'package:tinygram/features/home/presentation/widgets/app_tab.dart';
 import 'package:tinygram/features/home/presentation/widgets/chats_list_view.dart';
 
@@ -14,6 +15,93 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   late TabController tabController;
+
+  final List<ChatTileInfo> chatsInfo = [
+    ChatTileInfo(
+        title: 'Dart & Flutter',
+        lastMessageSender: 'Yoda',
+        lastMessage: 'May the force be with you',
+        lastMessageSentAt: '18:43',
+        unreadMessages: 33,
+        imagePath: 'assets/images/dartchat.jpg'),
+    ChatTileInfo(
+        title: 'Python',
+        lastMessageSender: 'Yoda',
+        lastMessage: 'May the force be with you',
+        lastMessageSentAt: '18:43',
+        unreadMessages: 1147,
+        imagePath: 'assets/images/pythonchat.jpg'),
+    ChatTileInfo(
+        title: 'Vue',
+        lastMessageSender: 'Yoda',
+        lastMessage: 'May the force be with you',
+        lastMessageSentAt: '18:43',
+        unreadMessages: 12345,
+        imagePath: 'assets/images/vuechat.jpg'),
+    ChatTileInfo(
+        title: 'Dart & Flutter',
+        lastMessageSender: 'Yoda',
+        lastMessage: 'May the force be with you',
+        lastMessageSentAt: '18:43',
+        unreadMessages: 33,
+        imagePath: 'assets/images/dartchat.jpg'),
+    ChatTileInfo(
+        title: 'Python',
+        lastMessageSender: 'Yoda',
+        lastMessage: 'May the force be with you',
+        lastMessageSentAt: '18:43',
+        unreadMessages: 1147,
+        imagePath: 'assets/images/pythonchat.jpg'),
+    ChatTileInfo(
+        title: 'Vue',
+        lastMessageSender: 'Yoda',
+        lastMessage: 'May the force be with you',
+        lastMessageSentAt: '18:43',
+        unreadMessages: 12345,
+        imagePath: 'assets/images/vuechat.jpg'),
+    ChatTileInfo(
+        title: 'Dart & Flutter',
+        lastMessageSender: 'Yoda',
+        lastMessage: 'May the force be with you',
+        lastMessageSentAt: '18:43',
+        unreadMessages: 33,
+        imagePath: 'assets/images/dartchat.jpg'),
+    ChatTileInfo(
+        title: 'Python',
+        lastMessageSender: 'Yoda',
+        lastMessage: 'May the force be with you',
+        lastMessageSentAt: '18:43',
+        unreadMessages: 1147,
+        imagePath: 'assets/images/pythonchat.jpg'),
+    ChatTileInfo(
+        title: 'Vue',
+        lastMessageSender: 'Yoda',
+        lastMessage: 'May the force be with you',
+        lastMessageSentAt: '18:43',
+        unreadMessages: 12345,
+        imagePath: 'assets/images/vuechat.jpg'),
+    ChatTileInfo(
+        title: 'Dart & Flutter',
+        lastMessageSender: 'Yoda',
+        lastMessage: 'May the force be with you',
+        lastMessageSentAt: '18:43',
+        unreadMessages: 33,
+        imagePath: 'assets/images/dartchat.jpg'),
+    ChatTileInfo(
+        title: 'Python',
+        lastMessageSender: 'Yoda',
+        lastMessage: 'May the force be with you',
+        lastMessageSentAt: '18:43',
+        unreadMessages: 1147,
+        imagePath: 'assets/images/pythonchat.jpg'),
+    ChatTileInfo(
+        title: 'Vue',
+        lastMessageSender: 'Yoda',
+        lastMessage: 'May the force be with you',
+        lastMessageSentAt: '18:43',
+        unreadMessages: 12345,
+        imagePath: 'assets/images/vuechat.jpg')
+  ];
 
   @override
   void initState() {
@@ -67,9 +155,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       drawer: const Drawer(),
       body: TabBarView(
         controller: tabController,
-        children: const [
-          ChatsListView(),
-          Center(
+        children: [
+          ChatsListView(chatsInfo: chatsInfo),
+          const Center(
             child: Text("Personal messages"),
           )
         ],
