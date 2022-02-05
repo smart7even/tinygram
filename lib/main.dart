@@ -14,9 +14,9 @@ void main() async {
 
   FirebaseAuth.instance.authStateChanges().listen((User? user) {
     if (user == null) {
-      print('User is currently signed out!');
+      debugPrint('User is currently signed out!');
     } else {
-      print('User is signed in!');
+      debugPrint('User is signed in!');
     }
   });
 
@@ -78,14 +78,7 @@ class FirebaseAuthExamplePage extends StatefulWidget {
 }
 
 class _FirebaseAuthExamplePageState extends State<FirebaseAuthExamplePage> {
-  int _counter = 0;
   User? user;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   void initState() {
@@ -98,7 +91,7 @@ class _FirebaseAuthExamplePageState extends State<FirebaseAuthExamplePage> {
 
   void signIn() async {
     var userCredential = await signInWithGoogle();
-    print(userCredential.user);
+    debugPrint(userCredential.user.toString());
     setState(() {
       user = userCredential.user;
     });
