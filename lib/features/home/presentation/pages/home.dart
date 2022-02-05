@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tinygram/constants.dart';
+import 'package:tinygram/features/chat/presentation/pages/chat_page.dart';
 import 'package:tinygram/features/home/presentation/widgets/app_tab.dart';
 import 'package:tinygram/features/home/presentation/widgets/chat_tile.dart';
 
@@ -78,6 +79,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             lastMessage: 'May the force be with you',
                             lastMessageSentAt: '18:43',
                             unreadMessages: 13 * index + 1,
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (ctx) {
+                                return const ChatPage(
+                                  title: 'Dart & Flutter',
+                                  imagePath: 'assets/images/dartchat.jpg',
+                                );
+                              }));
+                            },
                           )))),
           const Center(
             child: Text("Personal messages"),
