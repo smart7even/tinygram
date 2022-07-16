@@ -60,17 +60,16 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   fontSize: 17,
                   color: Colors.black))),
-      home: const HomePage(),
+      home: FirebaseAuthExamplePage(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
 class FirebaseAuthExamplePage extends StatefulWidget {
-  const FirebaseAuthExamplePage({Key? key, required this.title})
+  const FirebaseAuthExamplePage({Key? key})
       : super(key: key);
 
-  final String title;
 
   @override
   State<FirebaseAuthExamplePage> createState() =>
@@ -109,7 +108,7 @@ class _FirebaseAuthExamplePageState extends State<FirebaseAuthExamplePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.title),
+          title: const Text('Hello world'),
         ),
         body: Center(
           child: Column(
