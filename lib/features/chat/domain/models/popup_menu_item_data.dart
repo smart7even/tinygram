@@ -5,6 +5,9 @@ class PopupMenuItemData {
   final VoidCallback onPressed;
   final Widget icon;
 
-  PopupMenuItemData(
-      {required this.title, required this.onPressed, required this.icon});
+  PopupMenuItemData({
+    required this.title,
+    required this.onPressed,
+    required this.icon,
+  });
 }

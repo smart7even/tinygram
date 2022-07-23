@@ -70,8 +70,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '185991188731',
     projectId: 'messenger-757b3',
     storageBucket: 'messenger-757b3.appspot.com',
-    androidClientId: '185991188731-ss7egucpgvnmfun8i8hqgqabrldl8h86.apps.googleusercontent.com',
-    iosClientId: '185991188731-bt6jue2bt0jugg92crke7abbdn2516bp.apps.googleusercontent.com',
+    androidClientId:
+        '185991188731-ss7egucpgvnmfun8i8hqgqabrldl8h86.apps.googleusercontent.com',
+    iosClientId:
+        '185991188731-bt6jue2bt0jugg92crke7abbdn2516bp.apps.googleusercontent.com',
     iosBundleId: 'com.example.tinygram',
   );
 }

@@ -4,61 +4,61 @@ import 'package:args/args.dart';
 import 'package:path/path.dart';
 
 void main(List<String> args) {
-  var parser = ArgParser();
-  var generateFeatCommand = parser.addCommand('feature');
+  final parser = ArgParser();
+  final generateFeatCommand = parser.addCommand('feature');
   generateFeatCommand.addOption('name', abbr: 'n', mandatory: true);
-  var results = parser.parse(args);
+  final results = parser.parse(args);
 
-  var command = results.command;
+  final command = results.command;
 
   if (command != null) {
     if (command.name == 'feature') {
-      createNewFeature(command['name']);
+      createNewFeature(command['name'] as String);
     }
   }
 }
 
 Future<void> createNewFeature(String featureName) async {
-  Directory directory = Directory(join('lib', 'features'));
+  final directory = Directory(join('lib', 'features'));
 
-  if (!await directory.exists()) {
+  if (directory.existsSync()) {
     throw Exception('Features directory does not exist');
   }
 
-  var featureDirectory = Directory(join(directory.path, featureName));
+  final featureDirectory = Directory(join(directory.path, featureName));
 
-  if (await featureDirectory.exists()) {
+  if (featureDirectory.existsSync()) {
     throw Exception('Feature $featureName already exists');
   }
 
   await featureDirectory.create();
 
-  var dataDirectory = Directory(join(featureDirectory.path, 'data'));
+  final dataDirectory = Directory(join(featureDirectory.path, 'data'));
   await dataDirectory.create();
 
-  var repositoryDir = Directory(join(dataDirectory.path, 'repository'));
+  final repositoryDir = Directory(join(dataDirectory.path, 'repository'));
   await repositoryDir.create();
 
-  var domainDirectory = Directory(join(featureDirectory.path, 'domain'));
+  final domainDirectory = Directory(join(featureDirectory.path, 'domain'));
   await domainDirectory.create();
 
-  var repositoryInterfacesDir =
+  final repositoryInterfacesDir =
       Directory(join(domainDirectory.path, 'repository'));
   await repositoryInterfacesDir.create();
 
-  var modelsDir = Directory(join(domainDirectory.path, 'models'));
+  final modelsDir = Directory(join(domainDirectory.path, 'models'));
   await modelsDir.create();
 
-  var presentationDirectory =
+  final presentationDirectory =
       Directory(join(featureDirectory.path, 'presentation'));
   await presentationDirectory.create();
 
-  var blocDir = Directory(join(presentationDirectory.path, 'bloc'));
+  final blocDir = Directory(join(presentationDirectory.path, 'bloc'));
   await blocDir.create();
 
-  var widgetsDir = Directory(join(presentationDirectory.path, 'widgets'));
+  final widgetsDir = Directory(join(presentationDirectory.path, 'widgets'));
   await widgetsDir.create();
 
-  var pagesDir = Directory(join(presentationDirectory.path, 'pages'));
+  final pagesDir = Directory(join(presentationDirectory.path, 'pages'));
   await pagesDir.create();
 }

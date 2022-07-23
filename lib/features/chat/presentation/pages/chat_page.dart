@@ -4,11 +4,14 @@ import 'package:tinygram/features/chat/domain/models/popup_menu_item_data.dart';
 import 'package:tinygram/features/chat/presentation/widgets/popup_dropdown_button.dart';
 
 class ChatPage extends StatelessWidget {
-  const ChatPage({Key? key, required this.title, required this.imagePath})
-      : super(key: key);
-
   final String title;
   final String imagePath;
+
+  const ChatPage({
+    Key? key,
+    required this.title,
+    required this.imagePath,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +43,7 @@ class ChatPage extends StatelessWidget {
                         ?.copyWith(color: Colors.white),
                   ),
                   Text(
-                    "6552 members, 2800 online",
+                    '6552 members, 2800 online',
                     style: Theme.of(context)
                         .textTheme
                         .bodyText2
@@ -55,43 +58,47 @@ class ChatPage extends StatelessWidget {
           PopupMenuButtonAppBar(
             popupItems: [
               PopupMenuItemData(
-                  title: 'Search',
-                  icon: Icon(
-                    Icons.search,
-                    color: AppColors.grey,
-                    size: 27,
-                  ),
-                  onPressed: () {}),
+                title: 'Search',
+                icon: const Icon(
+                  Icons.search,
+                  color: AppColors.grey,
+                  size: 27,
+                ),
+                onPressed: () {},
+              ),
               PopupMenuItemData(
-                  title: 'Report',
-                  icon: Icon(
-                    Icons.report,
-                    color: AppColors.grey,
-                    size: 27,
-                  ),
-                  onPressed: () {}),
+                title: 'Report',
+                icon: const Icon(
+                  Icons.report,
+                  color: AppColors.grey,
+                  size: 27,
+                ),
+                onPressed: () {},
+              ),
               PopupMenuItemData(
-                  title: 'Unmute',
-                  icon: Icon(
-                    Icons.volume_up,
-                    color: AppColors.grey,
-                    size: 27,
-                  ),
-                  onPressed: () {}),
+                title: 'Unmute',
+                icon: const Icon(
+                  Icons.volume_up,
+                  color: AppColors.grey,
+                  size: 27,
+                ),
+                onPressed: () {},
+              ),
               PopupMenuItemData(
-                  title: 'Leave group',
-                  icon: Icon(
-                    Icons.logout,
-                    color: AppColors.grey,
-                    size: 27,
-                  ),
-                  onPressed: () {})
+                title: 'Leave group',
+                icon: const Icon(
+                  Icons.logout,
+                  color: AppColors.grey,
+                  size: 27,
+                ),
+                onPressed: () {},
+              )
             ],
           )
         ],
       ),
       body: const Center(
-        child: Text("Chat page"),
+        child: Text('Chat page'),
       ),
     );
   }
