@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:tinygram/common.dart';
 import 'package:tinygram/user_photo.dart';
 
 class FirebaseAuthExamplePage extends StatefulWidget {
@@ -41,9 +42,14 @@ class _FirebaseAuthExamplePageState extends State<FirebaseAuthExamplePage> {
 
   @override
   Widget build(BuildContext context) {
+    final appLocalizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Hello world'),
+        title: GestureDetector(
+          onTap: () {},
+          child: Text(appLocalizations.helloWorld),
+        ),
       ),
       body: Center(
         child: Column(
