@@ -1,10 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tinygram/common.dart';
-import 'package:tinygram/firebase_auth_example_page.dart';
 import 'package:tinygram/firebase_options.dart';
+import 'package:tinygram/routing.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,31 +11,23 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  FirebaseAuth.instance.authStateChanges().listen((User? user) async {
-    if (user == null) {
-      debugPrint('User is currently signed out!');
-    } else {
-      debugPrint('User is signed in!');
-      debugPrint(user.uid);
-      debugPrint(await user.getIdToken());
-    }
-  });
-
   runApp(
-    const MyApp(
+    MyApp(
       label: 'Hello world',
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
+  final _appRouter = AppRouter();
+
   final String label;
 
-  const MyApp({Key? key, required this.label}) : super(key: key);
+  MyApp({Key? key, required this.label}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Tinygram',
       localizationsDelegates: const [
         AppLocalizations.delegate,
@@ -63,8 +54,9 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const FirebaseAuthExamplePage(),
       debugShowCheckedModeBanner: false,
+      routerDelegate: _appRouter.delegate(),
+      routeInformationParser: _appRouter.defaultRouteParser(),
     );
   }
 }

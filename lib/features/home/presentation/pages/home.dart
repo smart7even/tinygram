@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tinygram/constants.dart';
 import 'package:tinygram/features/home/domain/models/chat_tile_info.dart';
 import 'package:tinygram/features/home/presentation/widgets/app_tab.dart';
@@ -121,6 +124,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     super.initState();
   }
 
+  Future<void> onSignOut() async {
+    await GoogleSignIn().disconnect();
+    await FirebaseAuth.instance.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -158,12 +166,22 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: 'edit_button',
         onPressed: () {},
         elevation: 0,
         backgroundColor: AppColors.blue,
         child: const Icon(Icons.edit),
       ),
-      drawer: const Drawer(),
+      drawer: Drawer(
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: onSignOut,
+              child: const Text('Logout'),
+            )
+          ],
+        ),
+      ),
       body: TabBarView(
         controller: tabController,
         children: [

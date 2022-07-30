@@ -4,15 +4,14 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tinygram/common.dart';
 import 'package:tinygram/user_photo.dart';
 
-class FirebaseAuthExamplePage extends StatefulWidget {
-  const FirebaseAuthExamplePage({Key? key}) : super(key: key);
+class AuthPage extends StatefulWidget {
+  const AuthPage({Key? key}) : super(key: key);
 
   @override
-  State<FirebaseAuthExamplePage> createState() =>
-      _FirebaseAuthExamplePageState();
+  State<AuthPage> createState() => _AuthPageState();
 }
 
-class _FirebaseAuthExamplePageState extends State<FirebaseAuthExamplePage> {
+class _AuthPageState extends State<AuthPage> {
   User? user;
 
   @override
@@ -20,16 +19,21 @@ class _FirebaseAuthExamplePageState extends State<FirebaseAuthExamplePage> {
     super.initState();
     user = FirebaseAuth.instance.currentUser;
     if (user == null) {
-      signIn();
+      GoogleSignIn().signOut().then((value) {
+        signIn();
+      });
     }
   }
 
   Future<void> signIn() async {
     final userCredential = await signInWithGoogle();
-    debugPrint(userCredential.user.toString());
-    setState(() {
-      user = userCredential.user;
-    });
+
+    if (userCredential != null) {
+      debugPrint(userCredential.user.toString());
+      setState(() {
+        user = userCredential.user;
+      });
+    }
   }
 
   Future<void> signOut() async {
@@ -70,16 +74,18 @@ class _FirebaseAuthExamplePageState extends State<FirebaseAuthExamplePage> {
         mainAxisSize: MainAxisSize.min,
         children: [
           FloatingActionButton(
+            heroTag: 'sign_in',
             onPressed: signIn,
-            tooltip: 'Increment',
+            tooltip: 'Sign In',
             child: const Icon(Icons.login),
           ),
           const SizedBox(
             height: 5,
           ),
           FloatingActionButton(
+            heroTag: 'sign_out',
             onPressed: signOut,
-            tooltip: 'Increment',
+            tooltip: 'Sign Out',
             child: const Icon(Icons.logout),
           )
         ],
@@ -88,17 +94,21 @@ class _FirebaseAuthExamplePageState extends State<FirebaseAuthExamplePage> {
   }
 }
 
-Future<UserCredential> signInWithGoogle() async {
+Future<UserCredential?> signInWithGoogle() async {
   // Trigger the authentication flow
   final googleUser = await GoogleSignIn().signIn();
 
+  if (googleUser == null) {
+    return null;
+  }
+
   // Obtain the auth details from the request
-  final googleAuth = await googleUser?.authentication;
+  final googleAuth = await googleUser.authentication;
 
   // Create a new credential
   final credential = GoogleAuthProvider.credential(
-    accessToken: googleAuth?.accessToken,
-    idToken: googleAuth?.idToken,
+    accessToken: googleAuth.accessToken,
+    idToken: googleAuth.idToken,
   );
 
   // Once signed in, return the UserCredential
