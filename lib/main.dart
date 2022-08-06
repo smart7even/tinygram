@@ -1,9 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tinygram/common.dart';
 import 'package:tinygram/firebase_options.dart';
-import 'package:tinygram/routing.dart';
+import 'package:tinygram/routing.gr.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,6 +54,14 @@ class MyApp extends StatelessWidget {
             color: Colors.black,
           ),
         ),
+      ),
+      scrollBehavior: const MaterialScrollBehavior().copyWith(
+        dragDevices: {
+          PointerDeviceKind.mouse,
+          PointerDeviceKind.touch,
+          PointerDeviceKind.stylus,
+          PointerDeviceKind.unknown
+        },
       ),
       debugShowCheckedModeBanner: false,
       routerDelegate: _appRouter.delegate(),

@@ -47,3 +47,10 @@ app.*.map.json
 
 # Vscode launch configuration
 .vscode
+
+# Code generation
+**/*.g.dart
+**/*.gr.dart
+**/*.gen.dart
+**/*.freezed.dart
+**/*.select.dart

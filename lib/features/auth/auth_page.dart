@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tinygram/common.dart';
+import 'package:tinygram/routing.dart';
 import 'package:tinygram/user_photo.dart';
 
 class AuthPage extends StatefulWidget {
@@ -22,6 +24,10 @@ class _AuthPageState extends State<AuthPage> {
       GoogleSignIn().signOut().then((value) {
         signIn();
       });
+    } else {
+      AutoRouter.of(context).replaceAll(
+        [const HomeRoute()],
+      );
     }
   }
 

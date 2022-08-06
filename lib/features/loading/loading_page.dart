@@ -3,7 +3,8 @@ import 'dart:developer';
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:tinygram/routing.dart';
+import 'package:tinygram/features/chat/domain/models/app_user.dart';
+import 'package:tinygram/routing.gr.dart';
 
 class LoadingPage extends StatefulWidget {
   const LoadingPage({Key? key}) : super(key: key);
@@ -27,7 +28,9 @@ class _LoadingPageState extends State<LoadingPage> {
         final token = await user.getIdToken();
         debugPrint(token.length.toString());
         log(token);
-        await router.replaceAll([const HomeRoute()]);
+        await router.replaceAll([
+          const HomeRoute(),
+        ]);
       }
     });
   }

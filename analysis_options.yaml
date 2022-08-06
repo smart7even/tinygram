@@ -17,6 +17,7 @@ dart_code_metrics:
   rules:
     - avoid-ignoring-return-values: false
     - no-magic-number: false
+    - avoid-dynamic: false
 
 linter:
   # The lint rules applied to this project can be customized in the
@@ -34,6 +35,7 @@ linter:
   rules:
     prefer_expression_function_bodies: false
     cascade_invocations: false
+    avoid-dynamic: false
     # avoid_print: false  # Uncomment to disable the `avoid_print` rule
     # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
 # Additional information about this file can be found at

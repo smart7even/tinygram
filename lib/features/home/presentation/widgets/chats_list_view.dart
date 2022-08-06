@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tinygram/features/home/domain/models/chat_tile_info.dart';
 
 import 'package:tinygram/features/home/presentation/widgets/chat_tile.dart';
-import 'package:tinygram/routing.dart';
+import 'package:tinygram/routing.gr.dart';
 
 class ChatsListView extends StatelessWidget {
   final List<ChatTileInfo> chatsInfo;
