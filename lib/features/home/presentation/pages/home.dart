@@ -186,21 +186,25 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               preferredSize: const Size.fromHeight(40),
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: TabBar(
-                  isScrollable: true,
-                  controller: tabController,
-                  indicatorColor: const Color(0xFFFDFBF8),
-                  indicatorSize: TabBarIndicatorSize.label,
-                  tabs: const [
-                    AppTab(
-                      title: 'All',
-                      unreadMessagesCounter: 10,
-                    ),
-                    AppTab(
-                      title: 'Personal',
-                      unreadMessagesCounter: 0,
-                    ),
-                  ],
+                child: BlocBuilder<ChatsBloc, ChatsState>(
+                  builder: (context, state) {
+                    return TabBar(
+                      isScrollable: true,
+                      controller: tabController,
+                      indicatorColor: const Color(0xFFFDFBF8),
+                      indicatorSize: TabBarIndicatorSize.label,
+                      tabs: [
+                        AppTab(
+                          title: 'All',
+                          unreadMessagesCounter: state.chats.length,
+                        ),
+                        const AppTab(
+                          title: 'Personal',
+                          unreadMessagesCounter: 0,
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
             ),
