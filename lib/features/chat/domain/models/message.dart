@@ -8,6 +8,7 @@ class Message with _$Message {
   const factory Message({
     required final String id,
     required final String userId,
+    required final String userName,
     required final String chatId,
     required final DateTime sentAt,
     required final String text,

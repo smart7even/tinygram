@@ -140,6 +140,7 @@ class ChatPage extends StatelessWidget {
 
                       return ListTile(
                         title: Text(message.text),
+                        subtitle: Text(message.userName),
                       );
                     },
                     itemCount: state.messages.length,
