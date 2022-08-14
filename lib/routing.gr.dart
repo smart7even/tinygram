@@ -30,8 +30,10 @@ class AppRouter extends _i5.RootStackRouter {
           routeData: routeData, child: const _i1.LoadingPage());
     },
     HomeRoute.name: (routeData) {
+      final args = routeData.argsAs<HomeRouteArgs>();
       return _i5.MaterialPageX<_i2.HomePage>(
-          routeData: routeData, child: const _i2.HomePage());
+          routeData: routeData,
+          child: _i2.HomePage(key: args.key, token: args.token));
     },
     AuthRoute.name: (routeData) {
       return _i5.MaterialPageX<_i3.AuthPage>(
@@ -65,10 +67,25 @@ class LoadingRoute extends _i5.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.HomePage]
-class HomeRoute extends _i5.PageRouteInfo<void> {
-  const HomeRoute() : super(HomeRoute.name, path: '/home-page');
+class HomeRoute extends _i5.PageRouteInfo<HomeRouteArgs> {
+  HomeRoute({_i6.Key? key, required String token})
+      : super(HomeRoute.name,
+            path: '/home-page', args: HomeRouteArgs(key: key, token: token));
 
   static const String name = 'HomeRoute';
+}
+
+class HomeRouteArgs {
+  const HomeRouteArgs({this.key, required this.token});
+
+  final _i6.Key? key;
+
+  final String token;
+
+  @override
+  String toString() {
+    return 'HomeRouteArgs{key: $key, token: $token}';
+  }
 }
 
 /// generated route for

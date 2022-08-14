@@ -16,7 +16,9 @@ import 'package:tinygram/features/home/presentation/widgets/chats_list_view.dart
 import 'package:tinygram/routing.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final String token;
+
+  const HomePage({Key? key, required this.token}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -144,12 +146,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     await FirebaseAuth.instance.signOut();
   }
 
-  ChatsBloc createChatsBLoC() {
+  ChatsBloc createChatsBLoC(String appToken) {
     final bloc = ChatsBloc(
       repository: ChatsRepository(
         chatsDAO: ChatsDAO(
           dio: Dio(
-            BaseOptions(baseUrl: kServerURL),
+            BaseOptions(
+              baseUrl: kServerURL,
+              headers: <String, String>{'token': appToken},
+            ),
           ),
         ),
       ),
@@ -168,9 +173,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     }
 
     return RepositoryProvider(
-      create: (context) => UserRepository(user: AppUser(user: currentUser)),
+      create: (context) => UserRepository(
+        user: AppUser(
+          user: currentUser,
+          token: widget.token,
+        ),
+      ),
       child: BlocProvider(
-        create: (context) => createChatsBLoC(),
+        create: (context) => createChatsBLoC(widget.token),
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: AppColors.darkBlue,

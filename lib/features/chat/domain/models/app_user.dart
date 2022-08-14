@@ -5,7 +5,10 @@ part 'app_user.freezed.dart';
 
 @freezed
 class AppUser with _$AppUser {
-  const factory AppUser({required final User user}) = _AppUser;
+  const factory AppUser({
+    required final User user,
+    required final String token,
+  }) = _AppUser;
 
   const AppUser._();
 }

@@ -26,7 +26,7 @@ class _AuthPageState extends State<AuthPage> {
       });
     } else {
       AutoRouter.of(context).replaceAll(
-        [const HomeRoute()],
+        [HomeRoute(token: '')],
       );
     }
   }
