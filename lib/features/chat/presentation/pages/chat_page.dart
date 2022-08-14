@@ -5,6 +5,7 @@ import 'package:tinygram/constants.dart';
 import 'package:tinygram/features/chat/bloc/chat_bloc.dart';
 import 'package:tinygram/features/chat/dao/chat_dao.dart';
 import 'package:tinygram/features/chat/domain/models/popup_menu_item_data.dart';
+import 'package:tinygram/features/chat/presentation/widgets/message_tile.dart';
 import 'package:tinygram/features/chat/presentation/widgets/popup_dropdown_button.dart';
 import 'package:tinygram/features/chat/repository/chat_repository.dart';
 
@@ -134,16 +135,22 @@ class ChatPage extends StatelessWidget {
             body: Column(
               children: [
                 Expanded(
-                  child: ListView.builder(
-                    itemBuilder: (context, index) {
-                      final message = state.messages[index];
+                  child: Container(
+                    color: AppColors.blue,
+                    child: ListView.separated(
+                      padding: const EdgeInsets.only(top: 10),
+                      itemBuilder: (context, index) {
+                        final message = state.messages[index];
 
-                      return ListTile(
-                        title: Text(message.text),
-                        subtitle: Text(message.userName),
-                      );
-                    },
-                    itemCount: state.messages.length,
+                        return MessageTile(message: message);
+                      },
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(
+                          height: 10,
+                        );
+                      },
+                      itemCount: state.messages.length,
+                    ),
                   ),
                 ),
                 const Divider(),
