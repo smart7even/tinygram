@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:tinygram/features/chat/domain/models/message.dart';
 
 class MessageTile extends StatelessWidget {
@@ -28,27 +29,59 @@ class MessageTile extends StatelessWidget {
           width: 10,
         ),
         Expanded(
-          child: Container(
-            padding: const EdgeInsets.all(10),
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(6)),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  message.userName,
-                  style: Theme.of(context).textTheme.subtitle1,
+          child: Stack(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(6)),
                 ),
-                const SizedBox(
-                  height: 3,
+                child: Stack(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          message.userName,
+                          style: Theme.of(context).textTheme.subtitle1,
+                        ),
+                        const SizedBox(
+                          height: 3,
+                        ),
+                        RichText(
+                          textWidthBasis: TextWidthBasis.longestLine,
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: message.text,
+                                style: Theme.of(context).textTheme.bodyText1,
+                              ),
+                              const WidgetSpan(
+                                child: SizedBox(
+                                  width: 5,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Positioned(
+                      right: 0,
+                      top: 0,
+                      child: Text(
+                        DateFormat.Hm().format(
+                          message.sentAt,
+                        ),
+                        textAlign: TextAlign.end,
+                        style: Theme.of(context).textTheme.subtitle1,
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  message.text,
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
         const SizedBox(
