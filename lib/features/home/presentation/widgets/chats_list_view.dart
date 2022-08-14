@@ -1,7 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tinygram/features/chat/repository/i_user_repository.dart';
 import 'package:tinygram/features/home/domain/models/chat_tile_info.dart';
-
 import 'package:tinygram/features/home/presentation/widgets/chat_tile.dart';
 import 'package:tinygram/routing.gr.dart';
 
@@ -15,6 +16,8 @@ class ChatsListView extends StatelessWidget {
       ChatRoute(
         title: chatInfo.title,
         imagePath: chatInfo.imagePath,
+        token: context.read<IUserRepository>().getUser().token,
+        chatId: chatInfo.id,
       ),
     );
   }

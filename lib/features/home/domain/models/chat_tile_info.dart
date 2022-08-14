@@ -1,4 +1,5 @@
 class ChatTileInfo {
+  final String id;
   final String title;
   final String lastMessageSender;
   final String lastMessage;
@@ -7,6 +8,7 @@ class ChatTileInfo {
   final String imagePath;
 
   ChatTileInfo({
+    required this.id,
     required this.title,
     required this.lastMessageSender,
     required this.lastMessage,

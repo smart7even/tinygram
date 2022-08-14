@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tinygram/common.dart';
+import 'package:tinygram/constants.dart';
 import 'package:tinygram/firebase_options.dart';
 import 'package:tinygram/routing.gr.dart';
 
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
             color: Colors.black,
           ),
         ),
+        primaryColorDark: AppColors.blue,
       ),
       scrollBehavior: const MaterialScrollBehavior().copyWith(
         dragDevices: {

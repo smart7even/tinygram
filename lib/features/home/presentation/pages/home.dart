@@ -9,6 +9,7 @@ import 'package:tinygram/features/chat/bloc/chats_bloc.dart';
 import 'package:tinygram/features/chat/dao/chats_dao.dart';
 import 'package:tinygram/features/chat/domain/models/app_user.dart';
 import 'package:tinygram/features/chat/repository/chats_repository.dart';
+import 'package:tinygram/features/chat/repository/i_user_repository.dart';
 import 'package:tinygram/features/chat/repository/user_repository.dart';
 import 'package:tinygram/features/home/domain/models/chat_tile_info.dart';
 import 'package:tinygram/features/home/presentation/widgets/app_tab.dart';
@@ -73,7 +74,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       return Container();
     }
 
-    return RepositoryProvider(
+    return RepositoryProvider<IUserRepository>(
       create: (context) => UserRepository(
         user: AppUser(
           user: currentUser,
@@ -163,6 +164,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 lastMessageSentAt: '18:43',
                                 unreadMessages: 1147,
                                 imagePath: 'assets/images/pythonchat.jpg',
+                                id: e.id,
                               ),
                             )
                             .toList(),

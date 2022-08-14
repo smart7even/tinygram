@@ -44,7 +44,11 @@ class AppRouter extends _i5.RootStackRouter {
       return _i5.MaterialPageX<_i4.ChatPage>(
           routeData: routeData,
           child: _i4.ChatPage(
-              key: args.key, title: args.title, imagePath: args.imagePath));
+              key: args.key,
+              title: args.title,
+              imagePath: args.imagePath,
+              token: args.token,
+              chatId: args.chatId));
     }
   };
 
@@ -99,16 +103,31 @@ class AuthRoute extends _i5.PageRouteInfo<void> {
 /// generated route for
 /// [_i4.ChatPage]
 class ChatRoute extends _i5.PageRouteInfo<ChatRouteArgs> {
-  ChatRoute({_i6.Key? key, required String title, required String imagePath})
+  ChatRoute(
+      {_i6.Key? key,
+      required String title,
+      required String imagePath,
+      required String token,
+      required String chatId})
       : super(ChatRoute.name,
             path: '/chat-page',
-            args: ChatRouteArgs(key: key, title: title, imagePath: imagePath));
+            args: ChatRouteArgs(
+                key: key,
+                title: title,
+                imagePath: imagePath,
+                token: token,
+                chatId: chatId));
 
   static const String name = 'ChatRoute';
 }
 
 class ChatRouteArgs {
-  const ChatRouteArgs({this.key, required this.title, required this.imagePath});
+  const ChatRouteArgs(
+      {this.key,
+      required this.title,
+      required this.imagePath,
+      required this.token,
+      required this.chatId});
 
   final _i6.Key? key;
 
@@ -116,8 +135,12 @@ class ChatRouteArgs {
 
   final String imagePath;
 
+  final String token;
+
+  final String chatId;
+
   @override
   String toString() {
-    return 'ChatRouteArgs{key: $key, title: $title, imagePath: $imagePath}';
+    return 'ChatRouteArgs{key: $key, title: $title, imagePath: $imagePath, token: $token, chatId: $chatId}';
   }
 }

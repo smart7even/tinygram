@@ -42,6 +42,8 @@ class _LoadingPageState extends State<LoadingPage> {
 
         final appToken = await authRepository.getAppToken(token);
 
+        log(appToken);
+
         await router.replaceAll([
           HomeRoute(token: appToken),
         ]);
