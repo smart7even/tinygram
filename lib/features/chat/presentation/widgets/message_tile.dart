@@ -15,18 +15,15 @@ class MessageTile extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        const SizedBox(
-          width: 10,
-        ),
-        CircleAvatar(
-          backgroundColor: Colors.lightGreen,
-          child: Text(
-            message.userName[0],
-            style: const TextStyle(color: Colors.black),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: CircleAvatar(
+            backgroundColor: Colors.lightGreen,
+            child: Text(
+              message.userName[0],
+              style: const TextStyle(color: Colors.black),
+            ),
           ),
-        ),
-        const SizedBox(
-          width: 10,
         ),
         Expanded(
           child: Stack(
@@ -42,9 +39,25 @@ class MessageTile extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          message.userName,
-                          style: Theme.of(context).textTheme.subtitle1,
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              message.userName,
+                              style: Theme.of(context).textTheme.subtitle1,
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              DateFormat.Hm().format(message.sentAt),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle1
+                                  ?.copyWith(color: Colors.white),
+                              textAlign: TextAlign.end,
+                            ),
+                          ],
                         ),
                         const SizedBox(
                           height: 3,
@@ -57,11 +70,6 @@ class MessageTile extends StatelessWidget {
                                 text: message.text,
                                 style: Theme.of(context).textTheme.bodyText1,
                               ),
-                              const WidgetSpan(
-                                child: SizedBox(
-                                  width: 5,
-                                ),
-                              ),
                             ],
                           ),
                         ),
@@ -71,13 +79,11 @@ class MessageTile extends StatelessWidget {
                       right: 0,
                       top: 0,
                       child: Text(
-                        DateFormat.Hm().format(
-                          message.sentAt,
-                        ),
-                        textAlign: TextAlign.end,
+                        DateFormat.Hm().format(message.sentAt),
                         style: Theme.of(context).textTheme.subtitle1,
+                        textAlign: TextAlign.end,
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),
