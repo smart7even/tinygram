@@ -29,6 +29,11 @@ class ChatState with _$ChatState {
     required final List<Message> messages,
   }) = _ReadyChatState;
 
+  factory ChatState.messageSendingComplete({
+    required final String chatId,
+    required final List<Message> messages,
+  }) = _MessageSendingCompleteChatState;
+
   factory ChatState.error({
     required final String chatId,
     required final List<Message> messages,
@@ -95,6 +100,12 @@ class ChatBloc extends Bloc<ChatEvent, ChatState>
   ) async {
     try {
       await _repository.sendMessage(state.chatId, event.text);
+      emit(
+        ChatState.messageSendingComplete(
+          chatId: state.chatId,
+          messages: state.messages,
+        ),
+      );
       emit(ChatState.loading(chatId: state.chatId, messages: state.messages));
       final newData = await _repository.readAll(state.chatId);
       emit(ChatState.ready(chatId: state.chatId, messages: newData));

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tinygram/constants.dart';
 import 'package:tinygram/features/chat/bloc/chat_bloc.dart';
@@ -10,7 +11,7 @@ import 'package:tinygram/features/chat/presentation/widgets/message_tile.dart';
 import 'package:tinygram/features/chat/presentation/widgets/popup_dropdown_button.dart';
 import 'package:tinygram/features/chat/repository/chat_repository.dart';
 
-class ChatPage extends StatelessWidget {
+class ChatPage extends StatefulWidget {
   final String title;
   final String imagePath;
   final String token;
@@ -24,16 +25,29 @@ class ChatPage extends StatelessWidget {
     required this.chatId,
   }) : super(key: key);
 
+  @override
+  State<ChatPage> createState() => _ChatPageState();
+}
+
+class _ChatPageState extends State<ChatPage> {
+  final scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
   ChatBloc createChatBloc() {
     final bloc = ChatBloc(
-      initialState: ChatState.initial(chatId: chatId, messages: []),
+      initialState: ChatState.initial(chatId: widget.chatId, messages: []),
       repository: ChatRepository(
         chatDAO: ChatDAO(
           dio: Dio(
             BaseOptions(
               baseUrl: kServerURL,
               headers: <String, String>{
-                'token': token,
+                'token': widget.token,
               },
             ),
           ),
@@ -45,11 +59,26 @@ class ChatPage extends StatelessWidget {
     return bloc;
   }
 
+  void onChatBlocUpdate(BuildContext context, ChatState state) {
+    state.mapOrNull(
+      messageSendingComplete: (value) async {
+        await WidgetsBinding.instance.endOfFrame.then((value) {
+          scrollController.animateTo(
+            scrollController.position.maxScrollExtent,
+            duration: const Duration(milliseconds: 100),
+            curve: Curves.bounceIn,
+          );
+        });
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => createChatBloc(),
-      child: BlocBuilder<ChatBloc, ChatState>(
+      child: BlocConsumer<ChatBloc, ChatState>(
+        listener: onChatBlocUpdate,
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
@@ -59,7 +88,7 @@ class ChatPage extends StatelessWidget {
                 children: [
                   ClipOval(
                     child: Image.asset(
-                      imagePath,
+                      widget.imagePath,
                       height: 40,
                       width: 40,
                     ),
@@ -72,7 +101,7 @@ class ChatPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          title,
+                          widget.title,
                           style: Theme.of(context)
                               .textTheme
                               .headline2
@@ -139,7 +168,8 @@ class ChatPage extends StatelessWidget {
                   child: Container(
                     color: AppColors.blue,
                     child: ListView.separated(
-                      padding: const EdgeInsets.only(top: 10),
+                      controller: scrollController,
+                      padding: const EdgeInsets.only(top: 10, bottom: 10),
                       itemBuilder: (context, index) {
                         final message = state.messages[index];
 
