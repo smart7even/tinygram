@@ -5,6 +5,7 @@ import 'package:tinygram/constants.dart';
 import 'package:tinygram/features/chat/bloc/chat_bloc.dart';
 import 'package:tinygram/features/chat/dao/chat_dao.dart';
 import 'package:tinygram/features/chat/domain/models/popup_menu_item_data.dart';
+import 'package:tinygram/features/chat/presentation/widgets/message_text_field.dart';
 import 'package:tinygram/features/chat/presentation/widgets/message_tile.dart';
 import 'package:tinygram/features/chat/presentation/widgets/popup_dropdown_button.dart';
 import 'package:tinygram/features/chat/repository/chat_repository.dart';
@@ -154,35 +155,7 @@ class ChatPage extends StatelessWidget {
                   ),
                 ),
                 const Divider(),
-                Row(
-                  children: [
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    const Expanded(
-                      child: TextField(
-                        decoration: InputDecoration.collapsed(
-                          hintText: 'Message',
-                        ),
-                        maxLines: 5,
-                        minLines: 1,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      constraints: const BoxConstraints(
-                        maxHeight: 82,
-                      ),
-                      splashRadius: 20,
-                      color: Theme.of(context).primaryColorDark,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 8,
-                        horizontal: 15,
-                      ),
-                      icon: const Icon(Icons.send),
-                    )
-                  ],
-                ),
+                const MessageTextField(),
               ],
             ),
           );

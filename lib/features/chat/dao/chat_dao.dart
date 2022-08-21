@@ -27,4 +27,18 @@ class ChatDAO implements IChatDAO {
       rethrow;
     }
   }
+
+  @override
+  Future<void> sendMessage(String chatId, String text) async {
+    try {
+      await dio.post<String>(
+        '/chat/$chatId/message',
+        data: {
+          'text': text,
+        },
+      );
+    } on Exception {
+      rethrow;
+    }
+  }
 }

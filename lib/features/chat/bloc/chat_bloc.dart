@@ -45,6 +45,8 @@ class ChatEvent with _$ChatEvent {
   const ChatEvent._();
 
   factory ChatEvent.loadingStarted() = LoadingStartedChatEvent;
+  factory ChatEvent.messageSent({required final String text}) =
+      MessageSentChatEvent;
 
   /// Generate ChatEvent class from Map<String, Object?>
   factory ChatEvent.fromJson(Map<String, Object?> json) =>
@@ -66,6 +68,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState>
     on<ChatEvent>(
       (event, emit) => event.map<Future<void>>(
         loadingStarted: (event) => _fetch(event, emit),
+        messageSent: (event) => _sendMessage(event, emit),
       ),
       transformer: bloc_concurrency.sequential(),
     );
@@ -77,6 +80,21 @@ class ChatBloc extends Bloc<ChatEvent, ChatState>
     Emitter<ChatState> emit,
   ) async {
     try {
+      emit(ChatState.loading(chatId: state.chatId, messages: state.messages));
+      final newData = await _repository.readAll(state.chatId);
+      emit(ChatState.ready(chatId: state.chatId, messages: newData));
+    } on Object {
+      emit(ChatState.error(chatId: state.chatId, messages: state.messages));
+      rethrow;
+    }
+  }
+
+  Future<void> _sendMessage(
+    MessageSentChatEvent event,
+    Emitter<ChatState> emit,
+  ) async {
+    try {
+      await _repository.sendMessage(state.chatId, event.text);
       emit(ChatState.loading(chatId: state.chatId, messages: state.messages));
       final newData = await _repository.readAll(state.chatId);
       emit(ChatState.ready(chatId: state.chatId, messages: newData));
