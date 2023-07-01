@@ -6,4 +6,4 @@ class AppColors {
   static const Color grey = Color(0xFF909090);
 }
 
-const kServerURL = 'http://localhost:8080';
+const kServerURL = 'http://192.168.3.70:8090';

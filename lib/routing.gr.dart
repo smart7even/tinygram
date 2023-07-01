@@ -27,44 +27,70 @@ class AppRouter extends _i5.RootStackRouter {
   final Map<String, _i5.PageFactory> pagesMap = {
     LoadingRoute.name: (routeData) {
       return _i5.MaterialPageX<_i1.LoadingPage>(
-          routeData: routeData, child: const _i1.LoadingPage());
+        routeData: routeData,
+        child: const _i1.LoadingPage(),
+      );
     },
     HomeRoute.name: (routeData) {
       final args = routeData.argsAs<HomeRouteArgs>();
       return _i5.MaterialPageX<_i2.HomePage>(
-          routeData: routeData,
-          child: _i2.HomePage(key: args.key, token: args.token));
+        routeData: routeData,
+        child: _i2.HomePage(
+          key: args.key,
+          token: args.token,
+        ),
+      );
     },
     AuthRoute.name: (routeData) {
       return _i5.MaterialPageX<_i3.AuthPage>(
-          routeData: routeData, child: const _i3.AuthPage());
+        routeData: routeData,
+        child: const _i3.AuthPage(),
+      );
     },
     ChatRoute.name: (routeData) {
       final args = routeData.argsAs<ChatRouteArgs>();
       return _i5.MaterialPageX<_i4.ChatPage>(
-          routeData: routeData,
-          child: _i4.ChatPage(
-              key: args.key,
-              title: args.title,
-              imagePath: args.imagePath,
-              token: args.token,
-              chatId: args.chatId));
-    }
+        routeData: routeData,
+        child: _i4.ChatPage(
+          key: args.key,
+          title: args.title,
+          imagePath: args.imagePath,
+          token: args.token,
+          chatId: args.chatId,
+        ),
+      );
+    },
   };
 
   @override
   List<_i5.RouteConfig> get routes => [
-        _i5.RouteConfig(LoadingRoute.name, path: '/'),
-        _i5.RouteConfig(HomeRoute.name, path: '/home-page'),
-        _i5.RouteConfig(AuthRoute.name, path: '/auth-page'),
-        _i5.RouteConfig(ChatRoute.name, path: '/chat-page')
+        _i5.RouteConfig(
+          LoadingRoute.name,
+          path: '/',
+        ),
+        _i5.RouteConfig(
+          HomeRoute.name,
+          path: '/home-page',
+        ),
+        _i5.RouteConfig(
+          AuthRoute.name,
+          path: '/auth-page',
+        ),
+        _i5.RouteConfig(
+          ChatRoute.name,
+          path: '/chat-page',
+        ),
       ];
 }
 
 /// generated route for
 /// [_i1.LoadingPage]
 class LoadingRoute extends _i5.PageRouteInfo<void> {
-  const LoadingRoute() : super(LoadingRoute.name, path: '/');
+  const LoadingRoute()
+      : super(
+          LoadingRoute.name,
+          path: '/',
+        );
 
   static const String name = 'LoadingRoute';
 }
@@ -72,15 +98,26 @@ class LoadingRoute extends _i5.PageRouteInfo<void> {
 /// generated route for
 /// [_i2.HomePage]
 class HomeRoute extends _i5.PageRouteInfo<HomeRouteArgs> {
-  HomeRoute({_i6.Key? key, required String token})
-      : super(HomeRoute.name,
-            path: '/home-page', args: HomeRouteArgs(key: key, token: token));
+  HomeRoute({
+    _i6.Key? key,
+    required String token,
+  }) : super(
+          HomeRoute.name,
+          path: '/home-page',
+          args: HomeRouteArgs(
+            key: key,
+            token: token,
+          ),
+        );
 
   static const String name = 'HomeRoute';
 }
 
 class HomeRouteArgs {
-  const HomeRouteArgs({this.key, required this.token});
+  const HomeRouteArgs({
+    this.key,
+    required this.token,
+  });
 
   final _i6.Key? key;
 
@@ -95,7 +132,11 @@ class HomeRouteArgs {
 /// generated route for
 /// [_i3.AuthPage]
 class AuthRoute extends _i5.PageRouteInfo<void> {
-  const AuthRoute() : super(AuthRoute.name, path: '/auth-page');
+  const AuthRoute()
+      : super(
+          AuthRoute.name,
+          path: '/auth-page',
+        );
 
   static const String name = 'AuthRoute';
 }
@@ -103,31 +144,35 @@ class AuthRoute extends _i5.PageRouteInfo<void> {
 /// generated route for
 /// [_i4.ChatPage]
 class ChatRoute extends _i5.PageRouteInfo<ChatRouteArgs> {
-  ChatRoute(
-      {_i6.Key? key,
-      required String title,
-      required String imagePath,
-      required String token,
-      required String chatId})
-      : super(ChatRoute.name,
-            path: '/chat-page',
-            args: ChatRouteArgs(
-                key: key,
-                title: title,
-                imagePath: imagePath,
-                token: token,
-                chatId: chatId));
+  ChatRoute({
+    _i6.Key? key,
+    required String title,
+    required String imagePath,
+    required String token,
+    required String chatId,
+  }) : super(
+          ChatRoute.name,
+          path: '/chat-page',
+          args: ChatRouteArgs(
+            key: key,
+            title: title,
+            imagePath: imagePath,
+            token: token,
+            chatId: chatId,
+          ),
+        );
 
   static const String name = 'ChatRoute';
 }
 
 class ChatRouteArgs {
-  const ChatRouteArgs(
-      {this.key,
-      required this.title,
-      required this.imagePath,
-      required this.token,
-      required this.chatId});
+  const ChatRouteArgs({
+    this.key,
+    required this.title,
+    required this.imagePath,
+    required this.token,
+    required this.chatId,
+  });
 
   final _i6.Key? key;
 
